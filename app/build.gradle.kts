@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+    kotlin("plugin.serialization") version "2.0.0"
 }
 
 android {
@@ -66,4 +69,28 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // for navigation
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.navigation.compose)
+
+    // Dagger Hilt
+    implementation (libs.hilt.android)
+    kapt( libs.hilt.android.compiler)
+    implementation (libs.androidx.hilt.navigation.compose)
+
+    // Coil Image loading
+    implementation(libs.coil.compose)
+
+    //extended icons
+    implementation(libs.androidx.material.icons.extended.android)
+
+    //retrofit
+    implementation (libs.retrofit)
+    implementation(libs.converter.gson)
+
+
+    //custom bottom nev bar
+    implementation (libs.bottombar)
+
 }
