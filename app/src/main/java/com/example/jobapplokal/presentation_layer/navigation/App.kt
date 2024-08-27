@@ -97,7 +97,8 @@ fun App(navController: NavHostController) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = if (shouldShowBottomBar.value) innerPadding.calculateBottomPadding() else 0.dp)
+                .padding(innerPadding)
+
         ) {
 
 

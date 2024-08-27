@@ -31,8 +31,8 @@ class AppViewModel @Inject constructor(
                     when (jobList) {
                         is ResultState.Success -> {
                             Log.d("ViewModel", "ViewModel ----getAllJobs:-------${jobList.data.results.size}")
+                            Log.d("ViewModel", "ViewModel ----getAllJobs:-------${jobList.data.results[2].title}")
                             _jobs.value = jobList
-
 
                         }
                         is ResultState.Error -> {
