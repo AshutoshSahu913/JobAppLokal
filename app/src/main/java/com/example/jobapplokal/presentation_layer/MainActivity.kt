@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = androidx.compose.ui.Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-                    App(navHostController = navHostController)
+                    App(navController = navHostController)
                 }
 
             }

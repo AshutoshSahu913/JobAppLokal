@@ -4,11 +4,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.WorkOutline
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -21,12 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
-import androidx.navigation.compose.rememberNavController
 import com.example.bottombar.AnimatedBottomBar
 import com.example.bottombar.components.BottomBarItem
 import com.example.bottombar.model.IndicatorDirection
@@ -35,12 +33,13 @@ import com.example.bottombar.model.VisibleItem
 import com.example.jobapplokal.presentation_layer.screens.BookmarksScreen
 import com.example.jobapplokal.presentation_layer.screens.JobDetailsScreen
 import com.example.jobapplokal.presentation_layer.screens.JobScreen
+import com.example.jobapplokal.presentation_layer.viewModel.AppViewModel
 import com.example.jobapplokal.ui.theme.AppColor
 
 @Composable
-fun App(navHostController: NavHostController) {
+fun App(navController: NavHostController) {
 
-    val navController = rememberNavController()
+    val viewModel:AppViewModel= hiltViewModel()
 
     var selectedItem by remember { mutableIntStateOf(0) }
 
@@ -109,11 +108,11 @@ fun App(navHostController: NavHostController) {
                 navigation<SubNavigation.BottomNavScreen>(startDestination = NavigationRoutes.JobScreen) {
 
                     composable<NavigationRoutes.JobScreen> {
-                        JobScreen()
+                        JobScreen(viewModel,navController)
                     }
 
                     composable<NavigationRoutes.BookmarkScreen> {
-                        BookmarksScreen()
+                        BookmarksScreen(viewModel,navController)
                     }
 
 
@@ -121,7 +120,7 @@ fun App(navHostController: NavHostController) {
 
                 navigation<SubNavigation.OtherScreen>(startDestination = NavigationRoutes.JobDetailsScreen) {
                     composable<NavigationRoutes.JobDetailsScreen> {
-                        JobDetailsScreen()
+                        JobDetailsScreen(viewModel,navController)
                     }
                 }
             }

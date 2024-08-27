@@ -9,9 +9,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import com.example.jobapplokal.presentation_layer.viewModel.AppViewModel
 
 @Composable
-fun BookmarksScreen() {
+fun BookmarksScreen(viewModel: AppViewModel, navController: NavHostController) {
 
     Box(
         modifier = Modifier
