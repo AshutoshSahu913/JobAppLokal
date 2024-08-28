@@ -1,11 +1,15 @@
 package com.example.jobapplokal.presentation_layer.navigation
 
+import androidx.compose.animation.core.AnimationSpec
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.filled.Work
 import androidx.compose.material.icons.filled.WorkOutline
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -55,7 +59,7 @@ fun App(navController: NavHostController) {
     }
 
     val BottomNavItem = listOf(
-        BottomNavItem(Icons.Default.WorkOutline, "Jobs"),
+        BottomNavItem(Icons.Default.Work, "Jobs"),
         BottomNavItem(Icons.Default.Bookmark, "BookMarks"),
     )
     Scaffold(
@@ -72,6 +76,7 @@ fun App(navController: NavHostController) {
                     contentColor = Color.White,
                     indicatorDirection = IndicatorDirection.TOP,
                     indicatorStyle = IndicatorStyle.FILLED
+
                 ) {
                     BottomNavItem.forEachIndexed { index, navigationItem ->
                         BottomBarItem(
@@ -87,6 +92,7 @@ fun App(navController: NavHostController) {
                             label = navigationItem.title,
                             containerColor = Color.Transparent,
                             iconColor = Color.White,
+                            textColor = Color.Black,
                             visibleItem = VisibleItem.ICON
                         )
                     }
@@ -100,8 +106,6 @@ fun App(navController: NavHostController) {
                 .padding(innerPadding)
 
         ) {
-
-
             NavHost(
                 navController = navController,
                 startDestination = SubNavigation.BottomNavScreen
@@ -115,7 +119,6 @@ fun App(navController: NavHostController) {
                     composable<NavigationRoutes.BookmarkScreen> {
                         BookmarksScreen(viewModel,navController)
                     }
-
 
                 }
 
