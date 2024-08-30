@@ -1,8 +1,9 @@
 package com.example.jobapplokal.presentation_layer.navigation
 
-import androidx.compose.animation.core.AnimationSpec
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -10,7 +11,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.Work
-import androidx.compose.material.icons.filled.WorkOutline
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -38,12 +38,14 @@ import com.example.jobapplokal.presentation_layer.screens.BookmarksScreen
 import com.example.jobapplokal.presentation_layer.screens.JobDetailsScreen
 import com.example.jobapplokal.presentation_layer.screens.JobScreen
 import com.example.jobapplokal.presentation_layer.viewModel.AppViewModel
+import com.example.jobapplokal.presentation_layer.viewModel.SharedViewModel
 import com.example.jobapplokal.ui.theme.AppColor
 
 @Composable
 fun App(navController: NavHostController) {
 
     val viewModel:AppViewModel= hiltViewModel()
+    val sharedViewModel: SharedViewModel = hiltViewModel()
 
     var selectedItem by remember { mutableIntStateOf(0) }
 
@@ -112,19 +114,85 @@ fun App(navController: NavHostController) {
             ) {
                 navigation<SubNavigation.BottomNavScreen>(startDestination = NavigationRoutes.JobScreen) {
 
-                    composable<NavigationRoutes.JobScreen> {
-                        JobScreen(viewModel,navController)
+                    composable<NavigationRoutes.JobScreen>(exitTransition = {
+                        slideOutOfContainer(
+                            AnimatedContentTransitionScope.SlideDirection.Left,
+                            tween(300)
+                        ) + fadeOut()
+                    },
+                        popEnterTransition = {
+                            slideIntoContainer(
+                                AnimatedContentTransitionScope.SlideDirection.Right,
+                                tween(300)
+                            ) + fadeIn()
+                        },
+                        enterTransition = {
+                            slideIntoContainer(
+                                AnimatedContentTransitionScope.SlideDirection.Left,
+                                tween(100)
+                            ) + fadeIn()
+                        }, popExitTransition = {
+                            slideOutOfContainer(
+                                AnimatedContentTransitionScope.SlideDirection.Right,
+                                tween(300)
+                            ) + fadeOut()
+                        }) {
+                        JobScreen(viewModel, navController, sharedViewModel)
                     }
 
-                    composable<NavigationRoutes.BookmarkScreen> {
-                        BookmarksScreen(viewModel,navController)
+                    composable<NavigationRoutes.BookmarkScreen>(exitTransition = {
+                        slideOutOfContainer(
+                            AnimatedContentTransitionScope.SlideDirection.Left,
+                            tween(300)
+                        ) + fadeOut()
+                    },
+                        popEnterTransition = {
+                            slideIntoContainer(
+                                AnimatedContentTransitionScope.SlideDirection.Right,
+                                tween(300)
+                            ) + fadeIn()
+                        },
+                        enterTransition = {
+                            slideIntoContainer(
+                                AnimatedContentTransitionScope.SlideDirection.Left,
+                                tween(100)
+                            ) + fadeIn()
+                        }, popExitTransition = {
+                            slideOutOfContainer(
+                                AnimatedContentTransitionScope.SlideDirection.Right,
+                                tween(300)
+                            ) + fadeOut()
+                        }) {
+                        BookmarksScreen(viewModel, navController, sharedViewModel)
                     }
 
                 }
 
                 navigation<SubNavigation.OtherScreen>(startDestination = NavigationRoutes.JobDetailsScreen) {
-                    composable<NavigationRoutes.JobDetailsScreen> {
-                        JobDetailsScreen(viewModel,navController)
+                    composable<NavigationRoutes.JobDetailsScreen>(exitTransition = {
+                        slideOutOfContainer(
+                            AnimatedContentTransitionScope.SlideDirection.Left,
+                            tween(300)
+                        ) + fadeOut()
+                    },
+                        popEnterTransition = {
+                            slideIntoContainer(
+                                AnimatedContentTransitionScope.SlideDirection.Right,
+                                tween(300)
+                            ) + fadeIn()
+                        },
+                        enterTransition = {
+                            slideIntoContainer(
+                                AnimatedContentTransitionScope.SlideDirection.Left,
+                                tween(100)
+                            ) + fadeIn()
+                        }, popExitTransition = {
+                            slideOutOfContainer(
+                                AnimatedContentTransitionScope.SlideDirection.Right,
+                                tween(300)
+                            ) + fadeOut()
+                        }) {
+                        JobDetailsScreen(viewModel, navController, sharedViewModel)
                     }
                 }
             }

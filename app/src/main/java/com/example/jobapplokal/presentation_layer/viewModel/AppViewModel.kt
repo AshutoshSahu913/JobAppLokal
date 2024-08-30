@@ -6,9 +6,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jobapplokal.data_layer.model.JobResponse
+import com.example.jobapplokal.data_layer.room.JobResult
 import com.example.jobapplokal.domain_layer.repo.Repo
 import com.example.jobapplokal.utils.ResultState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -47,6 +51,41 @@ class AppViewModel @Inject constructor(
             } catch (e: Exception) {
                 _jobs.value = ResultState.Error(e)
                 Log.e("ViewModel", "Exception fetching jobs: ${e.message}")
+            }
+        }
+    }
+
+
+    fun setJobOffline(job: JobResult) {
+        viewModelScope.launch {
+            repo.setBookmarkJob(job = job)
+        }
+    }
+
+
+    private val _jobsOffline = MutableStateFlow<List<JobResult>>(emptyList())
+    val jobsOffline: StateFlow<List<JobResult>> = _jobsOffline
+    fun getAllJobFromRoom() {
+        viewModelScope.launch {
+            repo.getBookmarkedJobs().collect { jobs ->
+                _jobsOffline.value = jobs
+            }
+        }
+    }
+
+    fun removeJobFromBookmarks(job: JobResult) {
+        viewModelScope.launch {
+            repo.removeJobFromBookmarks(job)
+        }
+    }
+
+
+    private val _bookmarkedJob = MutableStateFlow<Boolean>(false)
+    val bookmarkedJob: StateFlow<Boolean> = _bookmarkedJob
+    fun isJobBookmarked(jobId: String) {
+        viewModelScope.launch {
+            repo.isJobBookmarked(jobId).collect { isBookMarked ->
+                _bookmarkedJob.value = isBookMarked
             }
         }
     }

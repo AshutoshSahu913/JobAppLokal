@@ -93,4 +93,14 @@ dependencies {
     //custom bottom nev bar
     implementation (libs.bottombar)
 
+
+    // for room
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+
+    // To use Kotlin annotation processing tool (kapt)
+    kapt(libs.androidx.room.compiler)
+
+    implementation (libs.room.ktx)
+    implementation (libs.androidx.runtime.livedata)
 }

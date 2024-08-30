@@ -15,6 +15,9 @@ composeBom = "2024.04.01"
 composeNavigation = "2.8.0-beta06"
 materialIconsExtendedAndroid = "1.6.8"
 retrofit = "2.11.0"
+roomKtx = "2.6.1"
+roomRuntime = "2.6.1"
+runtimeLivedata = "1.6.8"
 serialization = "1.6.3"
 coilCompose = "2.6.0"
 
@@ -22,6 +25,9 @@ coilCompose = "2.6.0"
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-material-icons-extended-android = { module = "androidx.compose.material:material-icons-extended-android", version.ref = "materialIconsExtendedAndroid" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+androidx-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "runtimeLivedata" }
 bottombar = { module = "com.canopas.compose-animated-navigationbar:bottombar", version.ref = "bottombar" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
@@ -44,6 +50,7 @@ navigation-compose = { module = "androidx.navigation:navigation-compose", versio
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization"}
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
